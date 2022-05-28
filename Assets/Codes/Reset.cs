@@ -8,8 +8,10 @@ public class Reset : MonoBehaviour
     
     public bool camReversed = false;
     Camera cam;
+    public int repeatTime;
+    bool KayriwasHere;
 
-    private void Awake()
+    private void Start()
     {
         Reset[] ResetScripts = FindObjectsOfType<Reset>();
         int i = 0;
@@ -23,31 +25,29 @@ public class Reset : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-        cam = Camera.main;
-        if (camReversed)
-        {
-            Camera.main.transform.eulerAngles = new Vector3(0, 0, 180);
-        }
-    }
-    private void Start()
-    {
-        
+
+        Debug.Log("Start");
+
 
     }
     void Update()
     {
-
+        if (camReversed && KayriwasHere)
+        {
+            KayriwasHere = false;
+            Debug.Log("Rev");
+            transform.Rotate(0, 0, 180);
+        }
 
         //Restart
         if (Input.GetKeyDown(KeyCode.R))
         {
 
             camReversed = !camReversed;
-
+            KayriwasHere = camReversed;
             Restart();
-
-
-                     
+            Debug.Log("1 artt?" + repeatTime);
+                    
         }
 
 
