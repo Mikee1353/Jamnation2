@@ -9,8 +9,7 @@ public class Reset : MonoBehaviour
     public bool camReversed = false;
     Camera cam;
 
-
-    private void Start()
+    private void Awake()
     {
         Reset[] ResetScripts = FindObjectsOfType<Reset>();
         int i = 0;
@@ -22,18 +21,17 @@ public class Reset : MonoBehaviour
             }
             i++;
         }
-        
+
         DontDestroyOnLoad(gameObject);
         cam = Camera.main;
         if (camReversed)
         {
-            cam.transform.rotation = Quaternion.Euler(0, 0, 180);
+            Camera.main.transform.eulerAngles = new Vector3(0, 0, 180);
         }
-        else
-        {
-
-        }
-
+    }
+    private void Start()
+    {
+        
 
     }
     void Update()
@@ -46,10 +44,10 @@ public class Reset : MonoBehaviour
 
             camReversed = !camReversed;
 
-            
-            
-
             Restart();
+
+
+                     
         }
 
 
