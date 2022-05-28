@@ -7,7 +7,8 @@ public class Reset : MonoBehaviour
 {
     
     public bool camReversed = false;
-    Camera cam;
+    public Camera camF;
+    public Camera camR;
     public int repeatTime;
     bool KayriwasHere;
 
@@ -32,11 +33,16 @@ public class Reset : MonoBehaviour
     }
     void Update()
     {
-        if (camReversed && KayriwasHere)
+        if (camReversed)
         {
             KayriwasHere = false;
-            Debug.Log("Rev");
-            transform.Rotate(0, 0, 180);
+            camR.gameObject.SetActive(true);
+            camF.gameObject.SetActive(false);
+        }
+        else
+        {
+            camF.gameObject.SetActive(true);
+            camR.gameObject.SetActive(false);
         }
 
         //Restart
@@ -44,7 +50,7 @@ public class Reset : MonoBehaviour
         {
 
             camReversed = !camReversed;
-            KayriwasHere = camReversed;
+            KayriwasHere = true;
             Restart();
             Debug.Log("1 artt?" + repeatTime);
                     
